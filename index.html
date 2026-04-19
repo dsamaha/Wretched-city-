@@ -267,9 +267,9 @@ h1,h2,h3,h4,h5,h6,.stitle,.discord-title,.footer-logo { color:#eef4fa !important
 </div>
 
 <div class="stats-bar">
-  <div class="stat"><span class="stat-num">128</span><span class="stat-label">Max Players</span></div>
-  <div class="stat"><span class="stat-num">24/7</span><span class="stat-label">Uptime</span></div>
-  <div class="stat"><span class="stat-num">500+</span><span class="stat-label">Community Members</span></div>
+  <div class="stat"><span class="stat-num" id="stat-online">--</span><span class="stat-label">Players Online</span></div>
+  <div class="stat"><span class="stat-num" id="stat-max">128</span><span class="stat-label">Max Players</span></div>
+  <div class="stat"><span class="stat-num" id="stat-status">●</span><span class="stat-label" id="stat-status-label">Checking...</span></div>
   <div class="stat"><span class="stat-num">15+</span><span class="stat-label">Custom Jobs</span></div>
 </div>
 
@@ -423,6 +423,58 @@ h1,h2,h3,h4,h5,h6,.stitle,.discord-title,.footer-logo { color:#eef4fa !important
   <div class="footer-logo">Wretched<span class="dot">.</span>City</div>
   <div class="footer-copy">© 2026 Wretched City RP · FiveM Roleplay · Not affiliated with Rockstar Games</div>
 </footer>
+
+<script>
+// ============================================
+// LIVE SERVER STATS — pulls from FiveM API
+// Updates every 30 seconds automatically
+// ============================================
+const SERVER_IP = '206.168.173.33';
+const SERVER_PORT = '30120';
+
+async function fetchServerStats() {
+  const onlineEl = document.getElementById('stat-online');
+  const maxEl = document.getElementById('stat-max');
+  const statusEl = document.getElementById('stat-status');
+  const statusLabelEl = document.getElementById('stat-status-label');
+
+  try {
+    // Fetch players and server info in parallel
+    const [playersRes, infoRes] = await Promise.all([
+      fetch(`http://${SERVER_IP}:${SERVER_PORT}/players.json`, { signal: AbortSignal.timeout(6000) }),
+      fetch(`http://${SERVER_IP}:${SERVER_PORT}/info.json`, { signal: AbortSignal.timeout(6000) })
+    ]);
+
+    const players = await playersRes.json();
+    const info = await infoRes.json();
+
+    // Players online
+    onlineEl.textContent = players.length;
+
+    // Max players from server info
+    const maxPlayers = info?.vars?.sv_maxClients || info?.vars?.onesync_maxPlayers || 128;
+    maxEl.textContent = maxPlayers;
+
+    // Status — online
+    statusEl.textContent = '●';
+    statusEl.style.cssText = 'color:#4ade80 !important;font-size:1.8rem !important;';
+    statusLabelEl.textContent = 'Server Online';
+    statusLabelEl.style.cssText = 'color:#4ade80 !important;';
+
+  } catch (err) {
+    // Server offline or unreachable
+    onlineEl.textContent = '0';
+    statusEl.textContent = '●';
+    statusEl.style.cssText = 'color:#f87171 !important;font-size:1.8rem !important;';
+    statusLabelEl.textContent = 'Server Offline';
+    statusLabelEl.style.cssText = 'color:#f87171 !important;';
+  }
+}
+
+// Run immediately then every 30 seconds
+fetchServerStats();
+setInterval(fetchServerStats, 30000);
+</script>
 
 </body>
 </html>
