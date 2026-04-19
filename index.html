@@ -4,6 +4,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="color-scheme" content="only light">
+<meta name="supported-color-schemes" content="light">
 <title>Wretched City RP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,13 +37,23 @@ a { -webkit-tap-highlight-color: transparent; }
 button, input, select { -webkit-appearance: none; appearance: none; }
 a:link, a:visited { color: inherit; }
 
-html { scroll-behavior: smooth; }
+/* Force all text to stay light — blocks iOS dark mode overrides */
+h1, h2, h3, h4, h5, h6 { color: #eef4fa; }
+p { color: #c8d4e0; }
+li { color: #c8d4e0; }
+span { color: inherit; }
+div { color: inherit; }
+
+html { scroll-behavior: smooth; color-scheme: only light; }
 
 body {
-background: var(–dark);
-color: var(–text);
+background: #080a0f !important;
+background-color: #080a0f !important;
+color: #c8d4e0 !important;
 font-family: var(–font-body);
 overflow-x: hidden;
+-webkit-text-size-adjust: 100%;
+color-scheme: only light;
 }
 
 /* NOISE OVERLAY */
