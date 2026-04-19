@@ -1,853 +1,214 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" style="background:#080a0f;">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="color-scheme" content="only light">
-<meta name="supported-color-schemes" content="light">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<meta name="theme-color" content="#080a0f"/>
 <title>Wretched City RP</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap');
-</style>
-<style>
-  :root {
-    --blue: #5bb8f5;
-    --blue-dim: #3a90cc;
-    --blue-glow: rgba(91,184,245,0.18);
-    --dark: #080a0f;
-    --dark2: #0d1018;
-    --dark3: #111520;
-    --mid: #1a1f2e;
-    --text: #c8d4e0;
-    --muted: #5a6a7a;
-    --white: #eef4fa;
-    --font-display: 'Bebas Neue', 'Arial Narrow', Arial, sans-serif;
-    --font-condensed: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
-    --font-body: 'Barlow', Arial, sans-serif;
-  }
-
-- { margin: 0; padding: 0; box-sizing: border-box; }
-
-/* Safari iOS resets */
-a { -webkit-tap-highlight-color: transparent; }
-button, input, select { -webkit-appearance: none; appearance: none; }
-a:link, a:visited { color: inherit; }
-
-/* Force all text to stay light — blocks iOS dark mode overrides */
-h1, h2, h3, h4, h5, h6 { color: #eef4fa; }
-p { color: #c8d4e0; }
-li { color: #c8d4e0; }
-span { color: inherit; }
-div { color: inherit; }
-
-html { scroll-behavior: smooth; color-scheme: only light; }
-
-body {
-background: #080a0f !important;
-background-color: #080a0f !important;
-color: #c8d4e0 !important;
-font-family: var(–font-body);
-overflow-x: hidden;
--webkit-text-size-adjust: 100%;
-color-scheme: only light;
+/* RESET */
+*, *::before, *::after {
+  margin: 0 !important;
+  padding: 0;
+  box-sizing: border-box !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-text-size-adjust: none !important;
 }
+:root { color-scheme: light !important; forced-color-adjust: none !important; }
+html { background: #080a0f !important; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  background: #080a0f !important;
+  background-color: #080a0f !important;
+  color: #c8d4e0 !important;
+  font-family: 'Barlow', Arial, sans-serif !important;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+h1,h2,h3,h4,h5,h6 { color: #eef4fa !important; font-family: 'Bebas Neue','Arial Narrow',Arial,sans-serif !important; }
+a { color: inherit !important; text-decoration: none !important; }
+a:link,a:visited,a:hover,a:active { color: inherit !important; }
+p,li { color: inherit; }
 
-/* NOISE OVERLAY */
+/* NOISE */
 body::before {
 content: ‘’;
-position: fixed;
-inset: 0;
-background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘noise’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23noise)’ opacity=‘0.04’/%3E%3C/svg%3E”);
-pointer-events: none;
-z-index: 999;
-opacity: 0.4;
+position: fixed; inset: 0;
+background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘300’ height=‘300’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.75’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘300’ height=‘300’ filter=‘url(%23n)’ opacity=‘0.03’/%3E%3C/svg%3E”);
+pointer-events: none; z-index: 9998; opacity: 0.5;
 }
 
 /* NAV */
 nav {
-position: fixed;
-top: 0; left: 0; right: 0;
-z-index: 100;
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 20px 60px;
-background: linear-gradient(to bottom, rgba(8,10,15,0.95), transparent);
-backdrop-filter: blur(2px);
+position: fixed !important; top:0; left:0; right:0; z-index:1000;
+display: flex !important; align-items: center !important; justify-content: space-between !important;
+padding: 18px 48px;
+background: linear-gradient(to bottom, rgba(8,10,15,0.97), rgba(8,10,15,0)) !important;
+backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
 }
-
-.nav-logo {
-font-family: var(–font-display);
-font-size: 1.6rem;
-letter-spacing: 3px;
-color: #eef4fa !important;
-}
-.nav-logo span { color: #5bb8f5 !important; }
-
-.nav-links {
-display: flex;
-gap: 36px;
-list-style: none;
-}
-.nav-links a {
-color: var(–muted);
-text-decoration: none;
-font-family: var(–font-condensed);
-font-size: 0.85rem;
-letter-spacing: 2px;
-text-transform: uppercase;
-transition: color 0.2s;
-}
-.nav-links a:hover { color: var(–blue); }
-
-.nav-cta {
-background: transparent;
-border: 1px solid #5bb8f5;
-color: #5bb8f5 !important;
-padding: 8px 22px;
-font-family: var(–font-condensed);
-font-size: 0.8rem;
-letter-spacing: 2px;
-text-transform: uppercase;
-cursor: pointer;
-transition: all 0.2s;
-text-decoration: none !important;
-display: inline-block;
-}
-.nav-cta:hover {
-background: #5bb8f5;
-color: #080a0f !important;
-}
+.nav-logo { font-family:‘Bebas Neue’,‘Arial Narrow’,Arial,sans-serif !important; font-size:1.55rem !important; letter-spacing:4px !important; color:#eef4fa !important; line-height:1; }
+.nav-logo .dot { color:#5bb8f5 !important; }
+.nav-links { display:flex !important; gap:32px; list-style:none; }
+.nav-links a { color:#5a6a7a !important; font-family:‘Barlow Condensed’,‘Arial Narrow’,Arial,sans-serif !important; font-size:0.8rem !important; letter-spacing:2.5px !important; text-transform:uppercase !important; transition:color 0.2s; }
+.nav-links a:hover { color:#5bb8f5 !important; }
+.nav-btn { font-family:‘Barlow Condensed’,‘Arial Narrow’,Arial,sans-serif !important; font-size:0.75rem !important; letter-spacing:2px !important; text-transform:uppercase !important; color:#5bb8f5 !important; border:1px solid #5bb8f5 !important; padding:8px 20px !important; display:inline-block !important; transition:all 0.2s; background:transparent !important; }
+.nav-btn:hover { background:#5bb8f5 !important; color:#080a0f !important; }
 
 /* HERO */
-.hero {
-position: relative;
-height: 100vh;
-min-height: 700px;
-display: flex;
-align-items: center;
-justify-content: center;
-text-align: center;
-overflow: hidden;
-}
-
-.hero-bg {
-position: absolute;
-inset: 0;
-background:
-radial-gradient(ellipse 80% 60% at 50% 80%, rgba(91,184,245,0.08) 0%, transparent 60%),
-radial-gradient(ellipse 100% 80% at 50% 100%, rgba(91,184,245,0.04) 0%, transparent 50%),
-linear-gradient(160deg, #080a0f 0%, #0d1220 40%, #050810 100%);
-}
-
-/* City silhouette */
-.hero-city {
-position: absolute;
-bottom: 0;
-left: 0;
-right: 0;
-height: 45%;
-}
-
-.hero-city svg {
-width: 100%;
-height: 100%;
-}
-
-/* scanlines */
-.hero::after {
-content: ‘’;
-position: absolute;
-inset: 0;
-background: repeating-linear-gradient(
-0deg,
-transparent,
-transparent 3px,
-rgba(0,0,0,0.03) 3px,
-rgba(0,0,0,0.03) 4px
-);
-pointer-events: none;
-}
-
-.hero-content {
-position: relative;
-z-index: 2;
-}
-
-.hero-eyebrow {
-font-family: var(–font-condensed);
-font-size: 0.75rem;
-letter-spacing: 6px;
-text-transform: uppercase;
-color: #5bb8f5 !important;
-margin-bottom: 18px;
-opacity: 0;
-animation: fadeUp 0.8s 0.2s forwards;
-}
-
-.hero-title {
-font-family: var(–font-display);
-font-size: clamp(5rem, 14vw, 11rem);
-line-height: 0.9;
-letter-spacing: 4px;
-color: #eef4fa !important;
-opacity: 0;
-animation: fadeUp 0.8s 0.4s forwards;
-}
-
-.hero-title .city {
-display: block;
-color: #eef4fa !important;
-text-shadow: 0 0 80px rgba(91,184,245,0.7), 0 0 160px rgba(91,184,245,0.4), 0 0 40px rgba(91,184,245,0.9);
-}
-
-.hero-subtitle {
-font-size: 1rem;
-color: #5a6a7a !important;
-letter-spacing: 2px;
-margin-top: 20px;
-font-weight: 300;
-opacity: 0;
-animation: fadeUp 0.8s 0.6s forwards;
-}
-
-.hero-buttons {
-display: flex;
-gap: 16px;
-justify-content: center;
-margin-top: 40px;
-opacity: 0;
-animation: fadeUp 0.8s 0.8s forwards;
-}
-
-.btn-primary {
-background: #5bb8f5;
-color: #080a0f !important;
-padding: 14px 40px;
-font-family: var(–font-condensed);
-font-size: 0.9rem;
-letter-spacing: 3px;
-text-transform: uppercase;
-text-decoration: none !important;
-font-weight: 700;
-transition: all 0.2s;
-clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-display: inline-block;
-}
-.btn-primary:hover {
-background: var(–white);
-transform: translateY(-2px);
-box-shadow: 0 10px 40px rgba(91,184,245,0.3);
-}
-
-.btn-secondary {
-background: transparent;
-color: #c8d4e0 !important;
-padding: 14px 40px;
-font-family: var(–font-condensed);
-font-size: 0.9rem;
-letter-spacing: 3px;
-text-transform: uppercase;
-text-decoration: none !important;
-border: 1px solid var(–muted);
-transition: all 0.2s;
-clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-display: inline-block;
-}
-.btn-secondary:hover {
-border-color: var(–blue);
-color: #5bb8f5 !important;
-}
-
-.hero-scroll {
-position: absolute;
-bottom: 36px;
-left: 50%;
-transform: translateX(-50%);
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 8px;
-color: var(–muted);
-font-family: var(–font-condensed);
-font-size: 0.7rem;
-letter-spacing: 3px;
-text-transform: uppercase;
-animation: fadeIn 1s 1.5s both;
-}
-
-.scroll-line {
-width: 1px;
-height: 40px;
-background: linear-gradient(to bottom, var(–blue), transparent);
-animation: scrollPulse 2s infinite;
-}
-
-/* SECTIONS */
-section {
-padding: 100px 60px;
-max-width: 1200px;
-margin: 0 auto;
-}
-
-.section-label {
-font-family: var(–font-condensed);
-font-size: 0.7rem;
-letter-spacing: 5px;
-text-transform: uppercase;
-color: var(–blue);
-margin-bottom: 12px;
-}
-
-.section-title {
-font-family: var(–font-display);
-font-size: clamp(2.5rem, 5vw, 4rem);
-letter-spacing: 2px;
-color: var(–white);
-line-height: 1;
-margin-bottom: 16px;
-}
-
-.section-divider {
-width: 60px;
-height: 2px;
-background: var(–blue);
-margin-bottom: 48px;
-}
+.hero { position:relative !important; width:100% !important; height:100vh !important; min-height:640px !important; display:flex !important; align-items:center !important; justify-content:center !important; text-align:center !important; overflow:hidden !important; background:#080a0f !important; }
+.hero-bg { position:absolute !important; inset:0 !important; background: radial-gradient(ellipse 70% 50% at 50% 90%, rgba(91,184,245,0.09) 0%, transparent 65%), radial-gradient(ellipse 100% 70% at 50% 100%, rgba(91,184,245,0.04) 0%, transparent 55%), linear-gradient(170deg, #090b10 0%, #0d1322 45%, #050810 100%) !important; z-index:0 !important; }
+.hero-city { position:absolute !important; bottom:0 !important; left:0 !important; right:0 !important; height:42% !important; z-index:1 !important; pointer-events:none !important; }
+.hero-city svg { width:100% !important; height:100% !important; }
+.hero-scanlines { position:absolute !important; inset:0 !important; background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.025) 3px,rgba(0,0,0,0.025) 4px) !important; pointer-events:none !important; z-index:2 !important; }
+.hero-content { position:relative !important; z-index:3 !important; padding:0 24px !important; }
+.hero-eyebrow { font-family:‘Barlow Condensed’,‘Arial Narrow’,Arial,sans-serif !important; font-size:0.72rem !important; letter-spacing:7px !important; text-transform:uppercase !important; color:#5bb8f5 !important; display:block !important; margin-bottom:16px !important; opacity:0; animation:fadeUp 0.7s 0.2s ease forwards; }
+.hero-title { font-family:‘Bebas Neue’,‘Arial Narrow’,Arial,sans-serif !important; font-size:clamp(4.5rem,16vw,10rem) !important; line-height:0.88 !important; letter-spacing:5px !important; color:#eef4fa !important; display:block !important; opacity:0; animation:fadeUp 0.7s 0.35s ease forwards; }
+.hero-title .glow { display:block !important; color:#eef4fa !important; text-shadow: 0 0 30px rgba(91,184,245,0.9), 0 0 80px rgba(91,184,245,0.5), 0 0 150px rgba(91,184,245,0.25) !important; }
+.hero-sub { font-family:‘Barlow’,Arial,sans-serif !important; font-size:0.95rem !important; color:#4a5a6a !important; letter-spacing:2px !important; font-weight:300 !important; margin-top:18px !important; display:block !important; opacity:0; animation:fadeUp 0.7s 0.5s ease forwards; }
+.hero-btns { display:flex !important; gap:14px !important; justify-content:center !important; margin-top:38px !important; flex-wrap:wrap !important; opacity:0; animation:fadeUp 0.7s 0.65s ease forwards; }
+.btn-blue { font-family:‘Barlow Condensed’,‘Arial Narrow’,Arial,sans-serif !important; font-size:0.85rem !important; letter-spacing:3px !important; text-transform:uppercase !important; font-weight:700 !important; color:#080a0f !important; background:#5bb8f5 !important; padding:13px 36px !important; text-decoration:none !important; display:inline-block !important; clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition:background 0.2s,transform 0.2s; }
+.btn-blue:hover { background:#eef4fa !important; transform:translateY(-2px); }
+.btn-ghost { font-family:‘Barlow Condensed’,‘Arial Narrow’,Arial,sans-serif !important; font-size:0.85rem !important; letter-spacing:3px !important; text-transform:uppercase !important; color:#c8d4e0 !important; background:transparent !important; border:1px solid #5a6a7a !important; padding:13px 36px !important; text-decoration:none !important; display:inline-block !important; clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition:all 0.2s; }
+.btn-ghost:hover { border-color:#5bb8f5 !important; color:#5bb8f5 !important; }
+.hero-scroll { position:absolute !important; bottom:32px !important; left:50% !important; transform:translateX(-50%) !important; display:flex !important; flex-direction:column !important; align-items:center !important; gap:8px !important; color:#3a4a5a !important; font-family:‘Barlow Condensed’,Arial,sans-serif !important; font-size:0.65rem !important; letter-spacing:3px !important; text-transform:uppercase !important; z-index:3 !important; animation:fadeIn 1s 1.4s both; }
+.scroll-line { width:1px !important; height:36px !important; background:linear-gradient(to bottom,#5bb8f5,transparent) !important; animation:pulse 2s ease-in-out infinite; }
 
 /* STATS */
-.stats-bar {
-background: var(–dark2);
-border-top: 1px solid rgba(91,184,245,0.1);
-border-bottom: 1px solid rgba(91,184,245,0.1);
-padding: 40px 60px;
-display: flex;
-justify-content: center;
-gap: 80px;
-}
+.stats-bar { background:#0a0d14 !important; background-color:#0a0d14 !important; border-top:1px solid rgba(91,184,245,0.1) !important; border-bottom:1px solid rgba(91,184,245,0.1) !important; display:flex !important; justify-content:center !important; gap:64px !important; padding:36px 48px !important; flex-wrap:wrap !important; }
+.stat { text-align:center !important; }
+.stat-num { font-family:‘Bebas Neue’,‘Arial Narrow’,Arial,sans-serif !important; font-size:2.8rem !important; color:#5bb8f5 !important; line-height:1 !important; display:block !important; }
+.stat-label { font-family:‘Barlow Condensed’,‘Arial Narrow’,Arial,sans-serif !important; font-size:0.65rem !important; letter-spacing:3px !important; text-transform:uppercase !important; color:#5a6a7a !important; margin-top:4px !important; display:block !important; }
 
-.stat {
-text-align: center;
-}
+/* SECTIONS */
+.sw { max-width:1160px !important; margin:0 auto !important; padding:90px 48px !important; }
+.sw-dark { background:#0a0d14 !important; background-color:#0a0d14 !important; border-top:1px solid rgba(91,184,245,0.07) !important; border-bottom:1px solid rgba(91,184,245,0.07) !important; }
+.sw-dark .inner { max-width:1160px !important; margin:0 auto !important; padding:90px 48px !important; }
+.stag { font-family:‘Barlow Condensed’,‘Arial Narrow’,Arial,sans-serif !important; font-size:0.68rem !important; letter-spacing:5px !important; text-transform:uppercase !important; color:#5bb8f5 !important; display:block !important; margin-bottom:10px !important; }
+.stitle { font-family:‘Bebas Neue’,‘Arial Narrow’,Arial,sans-serif !important; font-size:clamp(2.2rem,5vw,3.6rem) !important; letter-spacing:2px !important; color:#eef4fa !important; line-height:1 !important; }
+.srule { width:52px !important; height:2px !important; background:#5bb8f5 !important; margin-top:14px !important; margin-bottom:44px !important; border:none !important; display:block !important; }
 
-.stat-num {
-font-family: var(–font-display);
-font-size: 3rem;
-color: var(–blue);
-line-height: 1;
-}
-
-.stat-label {
-font-family: var(–font-condensed);
-font-size: 0.7rem;
-letter-spacing: 3px;
-text-transform: uppercase;
-color: var(–muted);
-margin-top: 4px;
-}
-
-/* JOIN SECTION */
-.join-steps {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 24px;
-margin-top: 48px;
-}
-
-.step-card {
-background: var(–dark2);
-border: 1px solid rgba(91,184,245,0.08);
-padding: 36px 30px;
-position: relative;
-transition: border-color 0.3s;
-}
-.step-card:hover {
-border-color: rgba(91,184,245,0.3);
-}
-
-.step-num {
-font-family: var(–font-display);
-font-size: 4rem;
-color: rgba(91,184,245,0.1);
-line-height: 1;
-position: absolute;
-top: 16px;
-right: 20px;
-}
-
-.step-icon {
-font-size: 1.8rem;
-margin-bottom: 16px;
-}
-
-.step-title {
-font-family: var(–font-condensed);
-font-size: 1.1rem;
-font-weight: 700;
-letter-spacing: 1px;
-text-transform: uppercase;
-color: var(–white);
-margin-bottom: 10px;
-}
-
-.step-text {
-font-size: 0.9rem;
-color: var(–muted);
-line-height: 1.7;
-}
-
-.step-text code {
-background: rgba(91,184,245,0.1);
-color: var(–blue);
-padding: 2px 8px;
-font-size: 0.85rem;
-border-radius: 2px;
-}
+/* STEPS */
+.steps-grid { display:grid !important; grid-template-columns:repeat(3,1fr) !important; gap:20px !important; }
+.step-card { background:#0d1018 !important; background-color:#0d1018 !important; border:1px solid rgba(91,184,245,0.08) !important; padding:32px 26px !important; position:relative !important; transition:border-color 0.3s; }
+.step-card:hover { border-color:rgba(91,184,245,0.28) !important; }
+.step-n { font-family:‘Bebas Neue’,‘Arial Narrow’,Arial,sans-serif !important; font-size:3.5rem !important; color:rgba(91,184,245,0.08) !important; position:absolute !important; top:12px !important; right:16px !important; line-height:1 !important; }
+.step-icon { font-size:1.7rem !important; margin-bottom:14px !important; display:block !important; }
+.step-title { font-family:‘Barlow Condensed’,‘Arial Narrow’,Arial,sans-serif !important; font-size:1rem !important; font-weight:700 !important; letter-spacing:1px !important; text-transform:uppercase !important; color:#eef4fa !important; margin-bottom:8px !important; display:block !important; }
+.step-text { font-size:0.88rem !important; color:#5a6a7a !important; line-height:1.7 !important; }
+.step-text code { background:rgba(91,184,245,0.1) !important; color:#5bb8f5 !important; padding:2px 7px !important; font-size:0.82rem !important; border-radius:2px !important; }
 
 /* FACTIONS */
-.factions-grid {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 2px;
-margin-top: 48px;
-}
-
-.faction-card {
-background: var(–dark2);
-padding: 40px;
-border-left: 3px solid transparent;
-transition: all 0.3s;
-cursor: default;
-position: relative;
-overflow: hidden;
-}
-.faction-card::before {
-content: ‘’;
-position: absolute;
-inset: 0;
-background: linear-gradient(135deg, var(–blue-glow), transparent);
-opacity: 0;
-transition: opacity 0.3s;
-}
-.faction-card:hover::before { opacity: 1; }
-.faction-card:hover { border-left-color: var(–blue); }
-
-.faction-icon {
-font-size: 2rem;
-margin-bottom: 14px;
-}
-
-.faction-name {
-font-family: var(–font-display);
-font-size: 1.6rem;
-letter-spacing: 2px;
-color: var(–white);
-margin-bottom: 8px;
-}
-
-.faction-desc {
-font-size: 0.88rem;
-color: var(–muted);
-line-height: 1.7;
-}
-
-.faction-tag {
-display: inline-block;
-margin-top: 14px;
-font-family: var(–font-condensed);
-font-size: 0.65rem;
-letter-spacing: 2px;
-text-transform: uppercase;
-color: var(–blue);
-border: 1px solid rgba(91,184,245,0.3);
-padding: 3px 10px;
-}
+.factions-grid { display:grid !important; grid-template-columns:repeat(2,1fr) !important; gap:2px !important; }
+.faction-card { background:#0d1018 !important; background-color:#0d1018 !important; padding:36px !important; border-left:3px solid transparent !important; transition:border-color 0.3s; }
+.faction-card:hover { border-left-color:#5bb8f5 !important; }
+.faction-icon { font-size:1.8rem !important; margin-bottom:12px !important; display:block !important; }
+.faction-name { font-family:‘Bebas Neue’,‘Arial Narrow’,Arial,sans-serif !important; font-size:1.5rem !important; letter-spacing:2px !important; color:#eef4fa !important; margin-bottom:8px !important; display:block !important; }
+.faction-desc { font-size:0.86rem !important; color:#5a6a7a !important; line-height:1.7 !important; }
+.faction-tag { display:inline-block !important; margin-top:14px !important; font-family:‘Barlow Condensed’,‘Arial Narrow’,Arial,sans-serif !important; font-size:0.62rem !important; letter-spacing:2px !important; text-transform:uppercase !important; color:#5bb8f5 !important; border:1px solid rgba(91,184,245,0.3) !important; padding:3px 10px !important; }
 
 /* RULES */
-.rules-section {
-background: #0d1018 !important;
-background-color: #0d1018 !important;
-border-top: 1px solid rgba(91,184,245,0.08);
-border-bottom: 1px solid rgba(91,184,245,0.08);
-}
-
-.rules-grid {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 24px;
-margin-top: 0;
-}
-
-.rule-item {
-display: flex;
-gap: 16px;
-align-items: flex-start;
-padding: 20px;
-border-left: 2px solid rgba(91,184,245,0.15);
-transition: border-color 0.2s;
-}
-.rule-item:hover { border-left-color: var(–blue); }
-
-.rule-num {
-font-family: var(–font-display);
-font-size: 1.4rem;
-color: var(–blue);
-opacity: 0.6;
-flex-shrink: 0;
-width: 30px;
-}
-
-.rule-title {
-font-family: var(–font-condensed);
-font-size: 1rem;
-font-weight: 700;
-letter-spacing: 1px;
-text-transform: uppercase;
-color: var(–white);
-margin-bottom: 4px;
-}
-
-.rule-desc {
-font-size: 0.82rem;
-color: var(–muted);
-line-height: 1.6;
-}
+.rules-grid { display:grid !important; grid-template-columns:repeat(2,1fr) !important; gap:20px !important; }
+.rule-item { display:flex !important; gap:16px !important; align-items:flex-start !important; padding:18px 20px !important; border-left:2px solid rgba(91,184,245,0.12) !important; transition:border-color 0.2s; background:transparent !important; }
+.rule-item:hover { border-left-color:#5bb8f5 !important; }
+.rule-n { font-family:‘Bebas Neue’,‘Arial Narrow’,Arial,sans-serif !important; font-size:1.3rem !important; color:rgba(91,184,245,0.45) !important; flex-shrink:0 !important; width:28px !important; line-height:1.2 !important; }
+.rule-title { font-family:‘Barlow Condensed’,‘Arial Narrow’,Arial,sans-serif !important; font-size:0.95rem !important; font-weight:700 !important; letter-spacing:1px !important; text-transform:uppercase !important; color:#eef4fa !important; margin-bottom:4px !important; display:block !important; }
+.rule-desc { font-size:0.82rem !important; color:#5a6a7a !important; line-height:1.65 !important; }
 
 /* STAFF */
-.staff-grid {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 20px;
-margin-top: 48px;
-}
-
-.staff-card {
-background: var(–dark2);
-border: 1px solid rgba(91,184,245,0.06);
-padding: 28px 20px;
-text-align: center;
-transition: all 0.3s;
-}
-.staff-card:hover {
-border-color: rgba(91,184,245,0.25);
-transform: translateY(-4px);
-}
-
-.staff-avatar {
-width: 72px;
-height: 72px;
-border-radius: 50%;
-background: var(–mid);
-border: 2px solid rgba(91,184,245,0.2);
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 1.8rem;
-margin: 0 auto 16px;
-}
-
-.staff-name {
-font-family: var(–font-condensed);
-font-size: 1rem;
-font-weight: 700;
-letter-spacing: 1px;
-color: var(–white);
-margin-bottom: 4px;
-}
-
-.staff-role {
-font-size: 0.75rem;
-color: var(–blue);
-letter-spacing: 1px;
-font-family: var(–font-condensed);
-text-transform: uppercase;
-}
+.staff-grid { display:grid !important; grid-template-columns:repeat(4,1fr) !important; gap:18px !important; }
+.staff-card { background:#0d1018 !important; background-color:#0d1018 !important; border:1px solid rgba(91,184,245,0.07) !important; padding:26px 18px !important; text-align:center !important; transition:all 0.3s; }
+.staff-card:hover { border-color:rgba(91,184,245,0.24) !important; transform:translateY(-3px); }
+.staff-avatar { width:68px !important; height:68px !important; border-radius:50% !important; background:#111826 !important; border:2px solid rgba(91,184,245,0.18) !important; display:flex !important; align-items:center !important; justify-content:center !important; font-size:1.7rem !important; margin:0 auto 14px !important; }
+.staff-name { font-family:‘Barlow Condensed’,‘Arial Narrow’,Arial,sans-serif !important; font-size:0.95rem !important; font-weight:700 !important; letter-spacing:1px !important; color:#eef4fa !important; margin-bottom:4px !important; display:block !important; }
+.staff-role { font-family:‘Barlow Condensed’,‘Arial Narrow’,Arial,sans-serif !important; font-size:0.7rem !important; letter-spacing:1.5px !important; text-transform:uppercase !important; color:#5bb8f5 !important; display:block !important; }
 
 /* STORE */
-.store-section {
-background: #111520 !important;
-background-color: #111520 !important;
-border-top: 1px solid rgba(91,184,245,0.08);
-}
-
-.packages-grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 20px;
-margin-top: 48px;
-}
-
-.package-card {
-background: var(–dark2);
-border: 1px solid rgba(91,184,245,0.1);
-padding: 36px 28px;
-text-align: center;
-position: relative;
-transition: all 0.3s;
-}
-.package-card:hover {
-border-color: var(–blue);
-transform: translateY(-4px);
-box-shadow: 0 20px 60px rgba(91,184,245,0.1);
-}
-.package-card.featured {
-border-color: var(–blue);
-background: linear-gradient(160deg, rgba(91,184,245,0.06), var(–dark2));
-}
-
-.package-badge {
-position: absolute;
-top: -1px;
-left: 50%;
-transform: translateX(-50%);
-background: var(–blue);
-color: var(–dark);
-font-family: var(–font-condensed);
-font-size: 0.65rem;
-letter-spacing: 2px;
-text-transform: uppercase;
-font-weight: 700;
-padding: 4px 16px;
-}
-
-.package-name {
-font-family: var(–font-display);
-font-size: 1.8rem;
-letter-spacing: 2px;
-color: var(–white);
-margin-bottom: 4px;
-margin-top: 10px;
-}
-
-.package-price {
-font-family: var(–font-display);
-font-size: 3rem;
-color: var(–blue);
-line-height: 1;
-margin: 16px 0;
-}
-.package-price sup {
-font-size: 1.2rem;
-vertical-align: super;
-}
-.package-price span {
-font-size: 1rem;
-color: var(–muted);
-font-family: var(–font-body);
-}
-
-.package-features {
-list-style: none;
-margin: 20px 0 28px;
-text-align: left;
-}
-.package-features li {
-font-size: 0.85rem;
-color: var(–text);
-padding: 7px 0;
-border-bottom: 1px solid rgba(255,255,255,0.04);
-display: flex;
-align-items: center;
-gap: 8px;
-}
-.package-features li::before {
-content: ‘▸’;
-color: var(–blue);
-flex-shrink: 0;
-}
-
-.btn-store {
-width: 100%;
-background: transparent;
-border: 1px solid var(–blue);
-color: var(–blue);
-padding: 12px;
-font-family: var(–font-condensed);
-font-size: 0.85rem;
-letter-spacing: 2px;
-text-transform: uppercase;
-cursor: pointer;
-transition: all 0.2s;
-text-decoration: none;
-display: block;
-}
-.btn-store:hover, .package-card.featured .btn-store {
-background: var(–blue);
-color: var(–dark);
-}
+.store-bg { background:#0c0f1a !important; background-color:#0c0f1a !important; border-top:1px solid rgba(91,184,245,0.07) !important; }
+.packages-grid { display:grid !important; grid-template-columns:repeat(3,1fr) !important; gap:18px !important; }
+.pkg-card { background:#0d1018 !important; background-color:#0d1018 !important; border:1px solid rgba(91,184,245,0.15) !important; padding:34px 24px !important; text-align:center !important; position:relative !important; transition:all 0.3s; }
+.pkg-card:hover { border-color:rgba(91,184,245,0.4) !important; transform:translateY(-4px); box-shadow:0 16px 48px rgba(91,184,245,0.08) !important; }
+.pkg-badge { position:absolute !important; top:-1px !important; left:50% !important; transform:translateX(-50%) !important; background:#5bb8f5 !important; color:#080a0f !important; font-family:‘Barlow Condensed’,‘Arial Narrow’,Arial,sans-serif !important; font-size:0.62rem !important; letter-spacing:2px !important; text-transform:uppercase !important; font-weight:700 !important; padding:4px 14px !important; white-space:nowrap !important; }
+.pkg-name { font-family:‘Bebas Neue’,‘Arial Narrow’,Arial,sans-serif !important; font-size:1.7rem !important; letter-spacing:2px !important; color:#eef4fa !important; margin-top:12px !important; margin-bottom:4px !important; display:block !important; }
+.pkg-price { font-family:‘Bebas Neue’,‘Arial Narrow’,Arial,sans-serif !important; font-size:2.8rem !important; color:#5bb8f5 !important; line-height:1 !important; margin:14px 0 !important; display:block !important; }
+.pkg-price sup { font-size:1.1rem !important; vertical-align:super !important; color:#5bb8f5 !important; }
+.pkg-mo { font-size:0.9rem !important; color:#5a6a7a !important; font-family:‘Barlow’,Arial,sans-serif !important; }
+.pkg-features { list-style:none !important; margin:18px 0 24px !important; text-align:left !important; }
+.pkg-features li { font-size:0.83rem !important; color:#c8d4e0 !important; padding:7px 0 !important; border-bottom:1px solid rgba(255,255,255,0.05) !important; display:flex !important; align-items:center !important; gap:8px !important; }
+.pkg-features li::before { content:‘▸’ !important; color:#5bb8f5 !important; flex-shrink:0 !important; }
+.btn-pkg { width:100% !important; display:block !important; background:transparent !important; border:1px solid #5bb8f5 !important; color:#5bb8f5 !important; padding:11px !important; font-family:‘Barlow Condensed’,‘Arial Narrow’,Arial,sans-serif !important; font-size:0.82rem !important; letter-spacing:2px !important; text-transform:uppercase !important; text-decoration:none !important; transition:all 0.2s; cursor:pointer !important; -webkit-appearance:none !important; appearance:none !important; }
+.btn-pkg:hover { background:#5bb8f5 !important; color:#080a0f !important; }
 
 /* DISCORD CTA */
-.discord-cta {
-background: linear-gradient(135deg, rgba(91,184,245,0.06), rgba(91,184,245,0.02));
-border: 1px solid rgba(91,184,245,0.15);
-border-radius: 0;
-padding: 80px 60px;
-text-align: center;
-max-width: 900px;
-margin: 0 auto 100px;
-}
-
-.discord-title {
-font-family: var(–font-display);
-font-size: clamp(2rem, 5vw, 3.5rem);
-letter-spacing: 3px;
-color: var(–white);
-margin-bottom: 16px;
-}
-
-.discord-sub {
-color: var(–muted);
-font-size: 0.95rem;
-margin-bottom: 36px;
-line-height: 1.8;
-}
-
-.btn-discord {
-display: inline-flex;
-align-items: center;
-gap: 12px;
-background: #5865F2;
-color: white;
-padding: 14px 40px;
-font-family: var(–font-condensed);
-font-size: 0.9rem;
-letter-spacing: 2px;
-text-transform: uppercase;
-text-decoration: none;
-font-weight: 700;
-transition: all 0.2s;
-clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-}
-.btn-discord:hover {
-background: #4752c4;
-transform: translateY(-2px);
-}
+.discord-cta { max-width:860px !important; margin:0 auto 90px !important; background:rgba(91,184,245,0.04) !important; border:1px solid rgba(91,184,245,0.14) !important; padding:72px 48px !important; text-align:center !important; }
+.discord-title { font-family:‘Bebas Neue’,‘Arial Narrow’,Arial,sans-serif !important; font-size:clamp(1.8rem,5vw,3.2rem) !important; letter-spacing:3px !important; color:#eef4fa !important; margin-bottom:14px !important; display:block !important; }
+.discord-sub { font-size:0.92rem !important; color:#5a6a7a !important; line-height:1.8 !important; margin-bottom:34px !important; }
+.btn-discord { display:inline-flex !important; align-items:center !important; gap:10px !important; background:#5865F2 !important; color:#ffffff !important; padding:13px 36px !important; font-family:‘Barlow Condensed’,‘Arial Narrow’,Arial,sans-serif !important; font-size:0.88rem !important; letter-spacing:2px !important; text-transform:uppercase !important; font-weight:700 !important; text-decoration:none !important; clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition:background 0.2s,transform 0.2s; }
+.btn-discord:hover { background:#4752c4 !important; transform:translateY(-2px); }
 
 /* FOOTER */
-footer {
-border-top: 1px solid rgba(91,184,245,0.08);
-padding: 40px 60px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-max-width: 1200px;
-margin: 0 auto;
-}
-
-.footer-logo {
-font-family: var(–font-display);
-font-size: 1.4rem;
-letter-spacing: 3px;
-color: var(–white);
-}
-.footer-logo span { color: var(–blue); }
-
-.footer-text {
-font-size: 0.78rem;
-color: var(–muted);
-letter-spacing: 1px;
-}
+footer { border-top:1px solid rgba(91,184,245,0.07) !important; padding:36px 48px !important; display:flex !important; justify-content:space-between !important; align-items:center !important; max-width:1160px !important; margin:0 auto !important; background:transparent !important; }
+.footer-logo { font-family:‘Bebas Neue’,‘Arial Narrow’,Arial,sans-serif !important; font-size:1.3rem !important; letter-spacing:3px !important; color:#eef4fa !important; }
+.footer-logo .dot { color:#5bb8f5 !important; }
+.footer-copy { font-size:0.75rem !important; color:#3a4a5a !important; }
 
 /* ANIMATIONS */
-@keyframes fadeUp {
-from { opacity: 0; transform: translateY(24px); }
-to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-from { opacity: 0; }
-to { opacity: 1; }
-}
-@keyframes scrollPulse {
-0%, 100% { opacity: 1; transform: scaleY(1); }
-50% { opacity: 0.3; transform: scaleY(0.6); }
+@keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes pulse { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:0.3;transform:scaleY(0.6)} }
+
+/* MOBILE */
+@media (max-width:768px) {
+nav { padding:16px 20px !important; }
+.nav-links { display:none !important; }
+.hero-title { font-size:clamp(3.8rem,17vw,5.5rem) !important; }
+.hero-btns { flex-direction:column !important; align-items:center !important; gap:12px !important; }
+.btn-blue,.btn-ghost { width:260px !important; text-align:center !important; clip-path:none !important; }
+.stats-bar { gap:28px !important; padding:28px 20px !important; }
+.sw { padding:64px 20px !important; }
+.sw-dark .inner { padding:64px 20px !important; }
+.steps-grid { grid-template-columns:1fr !important; gap:14px !important; }
+.factions-grid { grid-template-columns:1fr !important; }
+.rules-grid { grid-template-columns:1fr !important; gap:0 !important; }
+.staff-grid { grid-template-columns:repeat(2,1fr) !important; gap:12px !important; }
+.packages-grid { grid-template-columns:1fr !important; max-width:360px !important; margin-left:auto !important; margin-right:auto !important; gap:14px !important; }
+.discord-cta { padding:48px 20px !important; margin:0 20px 70px !important; }
+footer { flex-direction:column !important; gap:10px !important; text-align:center !important; padding:28px 20px !important; }
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-nav { padding: 16px 24px; }
-.nav-links { display: none; }
-section { padding: 70px 24px; }
-.stats-bar { padding: 32px 24px; gap: 32px; flex-wrap: wrap; }
-.join-steps, .factions-grid, .packages-grid { grid-template-columns: 1fr; }
-.rules-grid { grid-template-columns: 1fr; }
-.staff-grid { grid-template-columns: repeat(2, 1fr); }
-.discord-cta { padding: 50px 24px; margin: 0 24px 70px; }
-footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24px; }
-}
-
-/* BLOCK iOS / Safari dark mode from overriding anything */
+/* FORCE DARK MODE OVERRIDE — our colors always win */
 @media (prefers-color-scheme: dark) {
-html, body { background: #080a0f !important; color: #c8d4e0 !important; }
-h1, h2, h3, h4, h5, h6 { color: #eef4fa !important; }
-p, li, span, div { color: inherit !important; }
-.hero-title { color: #eef4fa !important; }
-.hero-title .city { color: #5bb8f5 !important; }
-.section-title { color: #eef4fa !important; }
-.nav-logo { color: #eef4fa !important; }
-.stat-num { color: #5bb8f5 !important; }
-.stat-label { color: #5a6a7a !important; }
-.step-title, .faction-name, .rule-title, .staff-name, .package-name { color: #eef4fa !important; }
-.step-text, .faction-desc, .rule-desc, .package-features li { color: #5a6a7a !important; }
-.package-price { color: #5bb8f5 !important; }
-.section-label, .faction-tag, .staff-role { color: #5bb8f5 !important; }
-.hero-eyebrow, .hero-subtitle { color: #5a6a7a !important; }
-.package-card, .step-card, .faction-card, .staff-card, .rule-item { background: #0d1018 !important; }
-.stats-bar, .rules-section { background: #0d1018 !important; }
-.store-section { background: #111520 !important; }
-.discord-cta { background: rgba(91,184,245,0.06) !important; }
-footer { background: transparent !important; }
-.btn-primary { background: #5bb8f5 !important; color: #080a0f !important; }
-.btn-store { color: #5bb8f5 !important; border-color: #5bb8f5 !important; background: transparent !important; }
-.package-card.featured .btn-store { background: #5bb8f5 !important; color: #080a0f !important; }
+html,body { background:#080a0f !important; color:#c8d4e0 !important; }
+.hero { background:#080a0f !important; }
+.stats-bar { background:#0a0d14 !important; }
+.sw-dark,.store-bg { background:#0a0d14 !important; }
+.step-card,.faction-card,.staff-card,.pkg-card { background:#0d1018 !important; }
+.discord-cta { background:rgba(91,184,245,0.04) !important; }
+h1,h2,h3,h4,h5,h6,.stitle,.discord-title,.footer-logo { color:#eef4fa !important; }
+.hero-title { color:#eef4fa !important; }
+.hero-title .glow { color:#eef4fa !important; }
+.stat-num,.pkg-price { color:#5bb8f5 !important; }
+.stat-label,.hero-sub,.step-text,.faction-desc,.rule-desc,.discord-sub,.footer-copy,.pkg-mo { color:#5a6a7a !important; }
+.stag,.faction-tag,.staff-role,.hero-eyebrow,.nav-logo .dot,.footer-logo .dot { color:#5bb8f5 !important; }
+.step-title,.faction-name,.rule-title,.staff-name,.pkg-name { color:#eef4fa !important; }
+.pkg-features li { color:#c8d4e0 !important; }
+.pkg-features li::before { color:#5bb8f5 !important; }
+.btn-blue { background:#5bb8f5 !important; color:#080a0f !important; }
+.btn-ghost { color:#c8d4e0 !important; border-color:#5a6a7a !important; }
+.btn-pkg { color:#5bb8f5 !important; border-color:#5bb8f5 !important; background:transparent !important; }
+.nav-btn { color:#5bb8f5 !important; border-color:#5bb8f5 !important; }
+.nav-logo { color:#eef4fa !important; }
+.nav-links a { color:#5a6a7a !important; }
 }
 </style>
 
 </head>
 <body>
 
-<!--
-===========================================
-  WRETCHED CITY RP — SITE CONFIG
-  Edit everything here, don't touch the rest
-===========================================
-
-  SERVER NAME:       Wretched City RP
-  DISCORD LINK:      https://discord.gg/dBFZrgDhSq
-  TEBEX STORE:       https://YOUR-SERVER.tebex.io   ← replace when ready
-  FIVEM CONNECT:     cfx.re/join/XXXXXX             ← replace with your code
-  COPYRIGHT YEAR:    2026
-
-  STATS (hero bar):
-    Max Players:     128
-    Community:       500+
-    Custom Jobs:     15+
-
-  PACKAGES (store section):
-    Civilian:        $5/mo
-    Gold VIP:        $15/mo
-    Elite:           $30/mo
-
-  STAFF NAMES:
-    Slot 1 (Owner):  Owner       ← replace with real name
-    Slot 2 (Dev):    Dev Team    ← replace with real name
-    Slot 3 (Admin):  Head Admin  ← replace with real name
-    Slot 4 (Mod):    Head Mod    ← replace with real name
-
-  TO FIND & REPLACE IN VS CODE:
-    Press Ctrl+H (Windows) or Cmd+H (Mac)
-    Search for the placeholder → type your value → Replace All
-
-===========================================
--->
-
-<!-- NAV -->
-
 <nav>
-  <div class="nav-logo">Wretched<span>.</span>City</div>
+  <a href="#" class="nav-logo">Wretched<span class="dot">.</span>City</a>
   <ul class="nav-links">
     <li><a href="#join">Join</a></li>
     <li><a href="#factions">Factions</a></li>
@@ -855,312 +216,212 @@ footer { background: transparent !important; }
     <li><a href="#staff">Staff</a></li>
     <li><a href="#store">Store</a></li>
   </ul>
-  <a href="https://discord.gg/dBFZrgDhSq" target="_blank" class="nav-cta">Discord</a>
+  <a href="https://discord.gg/dBFZrgDhSq" target="_blank" class="nav-btn">Discord</a>
 </nav>
-
-<!-- HERO -->
 
 <div class="hero">
   <div class="hero-bg"></div>
-
-  <!-- City skyline silhouette -->
-
   <div class="hero-city">
     <svg viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="cityGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#0d1220"/>
+        <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0e1322"/>
           <stop offset="100%" stop-color="#080a0f"/>
         </linearGradient>
-        <linearGradient id="glowGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(91,184,245,0.15)"/>
-          <stop offset="100%" stop-color="transparent"/>
-        </linearGradient>
       </defs>
-      <!-- Glow line at top of buildings -->
-      <rect x="0" y="78" width="1440" height="2" fill="rgba(91,184,245,0.12)"/>
-      <!-- Buildings -->
-      <path d="
-        M0,320 L0,200 L30,200 L30,180 L50,180 L50,160 L80,160 L80,140 L110,140 L110,80 L130,80 L130,60 L150,60 L150,80 L170,80 L170,120 L200,120 L200,100 L220,100 L220,80 L240,80 L240,60 L260,60 L260,40 L280,40 L280,20 L300,20 L300,40 L310,40 L310,60 L330,60 L330,100 L360,100 L360,80 L380,80 L380,60 L400,60 L400,40 L420,40 L420,60 L440,60 L440,80 L460,80 L460,100 L490,100 L490,70 L510,70 L510,50 L530,50 L530,30 L555,30 L555,10 L575,10 L575,30 L595,30 L595,50 L620,50 L620,70 L650,70 L650,90 L680,90 L680,60 L700,60 L700,40 L720,40 L720,20 L740,20 L740,40 L760,40 L760,60 L790,60 L790,80 L820,80 L820,100 L850,100 L850,80 L870,80 L870,60 L890,60 L890,50 L910,50 L910,30 L930,30 L930,50 L950,50 L950,70 L980,70 L980,90 L1010,90 L1010,70 L1030,70 L1030,50 L1060,50 L1060,30 L1080,30 L1080,10 L1100,10 L1100,30 L1120,30 L1120,50 L1150,50 L1150,70 L1180,70 L1180,90 L1210,90 L1210,110 L1240,110 L1240,90 L1260,90 L1260,70 L1290,70 L1290,90 L1320,90 L1320,110 L1360,110 L1360,140 L1400,140 L1400,180 L1440,180 L1440,320 Z
-      " fill="url(#cityGrad)"/>
-      <!-- Window lights -->
+      <path d="M0,320 L0,200 L30,200 L30,180 L50,180 L50,160 L80,160 L80,140 L110,140 L110,80 L130,80 L130,60 L150,60 L150,80 L170,80 L170,120 L200,120 L200,100 L220,100 L220,80 L240,80 L240,60 L260,60 L260,40 L280,40 L280,20 L300,20 L300,40 L310,40 L310,60 L330,60 L330,100 L360,100 L360,80 L380,80 L380,60 L400,60 L400,40 L420,40 L420,60 L440,60 L440,80 L460,80 L460,100 L490,100 L490,70 L510,70 L510,50 L530,50 L530,30 L555,30 L555,10 L575,10 L575,30 L595,30 L595,50 L620,50 L620,70 L650,70 L650,90 L680,90 L680,60 L700,60 L700,40 L720,40 L720,20 L740,20 L740,40 L760,40 L760,60 L790,60 L790,80 L820,80 L820,100 L850,100 L850,80 L870,80 L870,60 L890,60 L890,50 L910,50 L910,30 L930,30 L930,50 L950,50 L950,70 L980,70 L980,90 L1010,90 L1010,70 L1030,70 L1030,50 L1060,50 L1060,30 L1080,30 L1080,10 L1100,10 L1100,30 L1120,30 L1120,50 L1150,50 L1150,70 L1180,70 L1180,90 L1210,90 L1210,110 L1240,110 L1240,90 L1260,90 L1260,70 L1290,70 L1290,90 L1320,90 L1320,110 L1360,110 L1360,140 L1400,140 L1400,180 L1440,180 L1440,320 Z" fill="url(#cg)"/>
       <g fill="rgba(91,184,245,0.5)">
-        <rect x="285" y="28" width="4" height="4"/>
-        <rect x="295" y="28" width="4" height="4"/>
-        <rect x="285" y="38" width="4" height="4"/>
-        <rect x="560" y="18" width="4" height="4"/>
-        <rect x="570" y="26" width="4" height="4"/>
-        <rect x="560" y="34" width="4" height="4"/>
-        <rect x="725" y="28" width="4" height="4"/>
-        <rect x="735" y="28" width="4" height="4"/>
-        <rect x="1085" y="18" width="4" height="4"/>
-        <rect x="1095" y="26" width="4" height="4"/>
+        <rect x="285" y="28" width="4" height="4"/><rect x="295" y="28" width="4" height="4"/>
+        <rect x="285" y="38" width="4" height="4"/><rect x="560" y="18" width="4" height="4"/>
+        <rect x="570" y="26" width="4" height="4"/><rect x="560" y="34" width="4" height="4"/>
+        <rect x="725" y="28" width="4" height="4"/><rect x="735" y="28" width="4" height="4"/>
+        <rect x="1085" y="18" width="4" height="4"/><rect x="1095" y="26" width="4" height="4"/>
         <rect x="1085" y="34" width="4" height="4"/>
       </g>
-      <!-- Warm window lights -->
-      <g fill="rgba(255,200,100,0.3)">
-        <rect x="115" y="90" width="5" height="5"/>
-        <rect x="127" y="90" width="5" height="5"/>
-        <rect x="115" y="105" width="5" height="5"/>
-        <rect x="405" y="50" width="5" height="5"/>
-        <rect x="415" y="50" width="5" height="5"/>
-        <rect x="870" y="68" width="5" height="5"/>
+      <g fill="rgba(255,200,100,0.28)">
+        <rect x="115" y="90" width="5" height="5"/><rect x="127" y="90" width="5" height="5"/>
+        <rect x="115" y="105" width="5" height="5"/><rect x="405" y="50" width="5" height="5"/>
+        <rect x="415" y="50" width="5" height="5"/><rect x="870" y="68" width="5" height="5"/>
         <rect x="880" y="68" width="5" height="5"/>
       </g>
+      <rect x="0" y="9" width="1440" height="1" fill="rgba(91,184,245,0.08)"/>
     </svg>
   </div>
-
+  <div class="hero-scanlines"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow">FiveM Roleplay Server</p>
+    <span class="hero-eyebrow">FiveM Roleplay Server</span>
     <h1 class="hero-title">
       Wretched
-      <span class="city">City RP</span>
+      <span class="glow">City RP</span>
     </h1>
-    <p class="hero-subtitle">Where every street has a story. Every choice has a consequence.</p>
-    <div class="hero-buttons">
-      <a href="#join" class="btn-primary">Join the City</a>
-      <a href="#discord" class="btn-secondary">Discord</a>
+    <span class="hero-sub">Where every street has a story. Every choice has a consequence.</span>
+    <div class="hero-btns">
+      <a href="#join" class="btn-blue">Join the City</a>
+      <a href="https://discord.gg/dBFZrgDhSq" target="_blank" class="btn-ghost">Discord</a>
     </div>
   </div>
-
   <div class="hero-scroll">
     <div class="scroll-line"></div>
     Scroll
   </div>
 </div>
 
-<!-- STATS -->
-
 <div class="stats-bar">
-  <div class="stat">
-    <div class="stat-num">128</div>
-    <div class="stat-label">Max Players</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">24/7</div>
-    <div class="stat-label">Uptime</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">500+</div>
-    <div class="stat-label">Community Members</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">15+</div>
-    <div class="stat-label">Custom Jobs</div>
+  <div class="stat"><span class="stat-num">128</span><span class="stat-label">Max Players</span></div>
+  <div class="stat"><span class="stat-num">24/7</span><span class="stat-label">Uptime</span></div>
+  <div class="stat"><span class="stat-num">500+</span><span class="stat-label">Community Members</span></div>
+  <div class="stat"><span class="stat-num">15+</span><span class="stat-label">Custom Jobs</span></div>
+</div>
+
+<div class="sw" id="join">
+  <span class="stag">Get Started</span>
+  <h2 class="stitle">How to Join</h2>
+  <span class="srule"></span>
+  <div class="steps-grid">
+    <div class="step-card">
+      <span class="step-n">01</span>
+      <span class="step-icon">🎮</span>
+      <span class="step-title">Install FiveM</span>
+      <p class="step-text">Download FiveM from <code>fivem.net</code>. You need a legal copy of GTA V on PC to connect.</p>
+    </div>
+    <div class="step-card">
+      <span class="step-n">02</span>
+      <span class="step-icon">💬</span>
+      <span class="step-title">Join Discord</span>
+      <p class="step-text">Join our Discord, read the rules, apply for whitelist and get your role verified before connecting.</p>
+    </div>
+    <div class="step-card">
+      <span class="step-n">03</span>
+      <span class="step-icon">🌆</span>
+      <span class="step-title">Connect</span>
+      <p class="step-text">Search <code>Wretched City RP</code> in FiveM or connect via <code>cfx.re/join/XXXXXX</code> after approval.</p>
+    </div>
   </div>
 </div>
 
-<!-- HOW TO JOIN -->
-
-<section id="join">
-  <p class="section-label">Get Started</p>
-  <h2 class="section-title">How to Join</h2>
-  <div class="section-divider"></div>
-  <div class="join-steps">
-    <div class="step-card">
-      <div class="step-num">01</div>
-      <div class="step-icon">🎮</div>
-      <div class="step-title">Install FiveM</div>
-      <p class="step-text">Download and install FiveM from <code>fivem.net</code>. Make sure you own a legal copy of GTA V on PC.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-num">02</div>
-      <div class="step-icon">💬</div>
-      <div class="step-title">Join Discord</div>
-      <p class="step-text">Head to our Discord server to read the rules, apply for whitelist, and get your role verified.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-num">03</div>
-      <div class="step-icon">🌆</div>
-      <div class="step-title">Connect</div>
-      <p class="step-text">Open FiveM, search <code>Wretched City RP</code> or connect directly via <code>cfx.re/join/XXXXXX</code> after approval.</p>
-    </div>
-  </div>
-</section>
-
-<!-- FACTIONS -->
-
-<section id="factions" style="padding-top:0;">
-  <p class="section-label">The Streets</p>
-  <h2 class="section-title">Factions</h2>
-  <div class="section-divider"></div>
-  <div class="factions-grid">
-    <div class="faction-card">
-      <div class="faction-icon">🚔</div>
-      <div class="faction-name">Los Santos Police Dept.</div>
-      <p class="faction-desc">Serve and protect — or look the other way. The thin blue line between order and chaos in Wretched City.</p>
-      <span class="faction-tag">Whitelist Required</span>
-    </div>
-    <div class="faction-card">
-      <div class="faction-icon">🏥</div>
-      <div class="faction-name">Emergency Medical Services</div>
-      <p class="faction-desc">When the bullets fly and the city bleeds, EMS is the only thing standing between life and the morgue.</p>
-      <span class="faction-tag">Whitelist Required</span>
-    </div>
-    <div class="faction-card">
-      <div class="faction-icon">🔫</div>
-      <div class="faction-name">Street Gangs</div>
-      <p class="faction-desc">Turf wars, drug trades, and loyalty tested daily. Carve out your corner of the city or die trying.</p>
-      <span class="faction-tag">Open Recruitment</span>
-    </div>
-    <div class="faction-card">
-      <div class="faction-icon">💼</div>
-      <div class="faction-name">Criminal Enterprises</div>
-      <p class="faction-desc">Money laundering, heists, smuggling. The organized crime families of Wretched City operate in the shadows.</p>
-      <span class="faction-tag">Invite Only</span>
+<div class="sw-dark" id="factions">
+  <div class="inner">
+    <span class="stag">The Streets</span>
+    <h2 class="stitle">Factions</h2>
+    <span class="srule"></span>
+    <div class="factions-grid">
+      <div class="faction-card">
+        <span class="faction-icon">🚔</span>
+        <span class="faction-name">Los Santos Police Dept.</span>
+        <p class="faction-desc">Serve and protect — or look the other way. The thin blue line between order and chaos in Wretched City.</p>
+        <span class="faction-tag">Whitelist Required</span>
+      </div>
+      <div class="faction-card">
+        <span class="faction-icon">🏥</span>
+        <span class="faction-name">Emergency Medical Services</span>
+        <p class="faction-desc">When the bullets fly and the city bleeds, EMS is the only thing standing between life and the morgue.</p>
+        <span class="faction-tag">Whitelist Required</span>
+      </div>
+      <div class="faction-card">
+        <span class="faction-icon">🔫</span>
+        <span class="faction-name">Street Gangs</span>
+        <p class="faction-desc">Turf wars, drug trades, loyalty tested daily. Carve out your corner of the city or die trying.</p>
+        <span class="faction-tag">Open Recruitment</span>
+      </div>
+      <div class="faction-card">
+        <span class="faction-icon">💼</span>
+        <span class="faction-name">Criminal Enterprises</span>
+        <p class="faction-desc">Money laundering, heists, smuggling. The organized crime families operate deep in the shadows.</p>
+        <span class="faction-tag">Invite Only</span>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- RULES -->
-
-<div class="rules-section" style="padding: 0;">
-<section id="rules">
-  <p class="section-label">The Code</p>
-  <h2 class="section-title">Server Rules</h2>
-  <div class="section-divider"></div>
+<div class="sw" id="rules">
+  <span class="stag">The Code</span>
+  <h2 class="stitle">Server Rules</h2>
+  <span class="srule"></span>
   <div class="rules-grid">
-    <div class="rule-item">
-      <div class="rule-num">01</div>
-      <div>
-        <div class="rule-title">Roleplay Always</div>
-        <div class="rule-desc">Stay in character at all times. This is a serious RP server — immersion is everything.</div>
-      </div>
+    <div class="rule-item"><span class="rule-n">01</span><div><span class="rule-title">Roleplay Always</span><p class="rule-desc">Stay in character at all times. This is a serious RP server — immersion is everything.</p></div></div>
+    <div class="rule-item"><span class="rule-n">02</span><div><span class="rule-title">No RDM / VDM</span><p class="rule-desc">Random and Vehicle Deathmatch are strictly forbidden. Every action needs an RP reason.</p></div></div>
+    <div class="rule-item"><span class="rule-n">03</span><div><span class="rule-title">Value Your Life</span><p class="rule-desc">Act as your character would in real danger. No reckless decisions during active RP scenarios.</p></div></div>
+    <div class="rule-item"><span class="rule-n">04</span><div><span class="rule-title">No Meta-Gaming</span><p class="rule-desc">Using out-of-character information in-game is prohibited. Keep IC and OOC completely separate.</p></div></div>
+    <div class="rule-item"><span class="rule-n">05</span><div><span class="rule-title">Respect Everyone</span><p class="rule-desc">Harassment, discrimination, or toxic behaviour results in an immediate permanent ban.</p></div></div>
+    <div class="rule-item"><span class="rule-n">06</span><div><span class="rule-title">No Cheating / Exploiting</span><p class="rule-desc">Zero tolerance for hacks, mods, or bug exploits. Report issues to staff immediately.</p></div></div>
+  </div>
+</div>
+
+<div class="sw-dark" id="staff">
+  <div class="inner">
+    <span class="stag">The Team</span>
+    <h2 class="stitle">Staff</h2>
+    <span class="srule"></span>
+    <div class="staff-grid">
+      <div class="staff-card"><div class="staff-avatar">👑</div><span class="staff-name">Owner</span><span class="staff-role">Server Owner</span></div>
+      <div class="staff-card"><div class="staff-avatar">⚙️</div><span class="staff-name">Dev Team</span><span class="staff-role">Development</span></div>
+      <div class="staff-card"><div class="staff-avatar">🛡️</div><span class="staff-name">Head Admin</span><span class="staff-role">Administration</span></div>
+      <div class="staff-card"><div class="staff-avatar">🎭</div><span class="staff-name">Head Mod</span><span class="staff-role">Moderation</span></div>
     </div>
-    <div class="rule-item">
-      <div class="rule-num">02</div>
-      <div>
-        <div class="rule-title">No RDM / VDM</div>
-        <div class="rule-desc">Random Deathmatch and Vehicle Deathmatch are strictly forbidden. Every action needs RP reason.</div>
+  </div>
+</div>
+
+<div class="store-bg" id="store">
+  <div class="sw">
+    <span class="stag">Support the Server</span>
+    <h2 class="stitle">Store Packages</h2>
+    <span class="srule"></span>
+    <p style="color:#5a6a7a !important;font-size:0.88rem;margin-top:-30px !important;margin-bottom:16px !important;">All purchases handled securely through our Tebex store.</p>
+    <div class="packages-grid">
+      <div class="pkg-card">
+        <span class="pkg-name">Civilian</span>
+        <span class="pkg-price"><sup>$</sup>5<span class="pkg-mo">/mo</span></span>
+        <ul class="pkg-features">
+          <li>Priority Queue</li>
+          <li>Civilian Badge in Discord</li>
+          <li>Custom plate access</li>
+          <li>Basic starter kit</li>
+        </ul>
+        <a href="https://YOUR-SERVER.tebex.io" target="_blank" class="btn-pkg">Get Package</a>
       </div>
-    </div>
-    <div class="rule-item">
-      <div class="rule-num">03</div>
-      <div>
-        <div class="rule-title">Value Your Life</div>
-        <div class="rule-desc">Act as your character would in real danger. Don't make reckless decisions during active RP scenarios.</div>
+      <div class="pkg-card">
+        <div class="pkg-badge">Most Popular</div>
+        <span class="pkg-name">Gold VIP</span>
+        <span class="pkg-price"><sup>$</sup>15<span class="pkg-mo">/mo</span></span>
+        <ul class="pkg-features">
+          <li>Priority Queue + Reserved Slot</li>
+          <li>Gold role in Discord</li>
+          <li>Custom vehicle spawn</li>
+          <li>Extra character slots</li>
+          <li>Exclusive VIP areas</li>
+        </ul>
+        <a href="https://YOUR-SERVER.tebex.io" target="_blank" class="btn-pkg">Get Package</a>
       </div>
-    </div>
-    <div class="rule-item">
-      <div class="rule-num">04</div>
-      <div>
-        <div class="rule-title">No Meta-Gaming</div>
-        <div class="rule-desc">Using out-of-character information in-game is prohibited. Keep IC and OOC completely separate.</div>
-      </div>
-    </div>
-    <div class="rule-item">
-      <div class="rule-num">05</div>
-      <div>
-        <div class="rule-title">Respect Everyone</div>
-        <div class="rule-desc">Harassment, discrimination, or toxic behaviour will result in an immediate and permanent ban.</div>
-      </div>
-    </div>
-    <div class="rule-item">
-      <div class="rule-num">06</div>
-      <div>
-        <div class="rule-title">No Cheating / Exploiting</div>
-        <div class="rule-desc">Zero tolerance for hacks, mods, or exploiting bugs. Report issues to staff immediately.</div>
+      <div class="pkg-card">
+        <span class="pkg-name">Elite</span>
+        <span class="pkg-price"><sup>$</sup>30<span class="pkg-mo">/mo</span></span>
+        <ul class="pkg-features">
+          <li>All Gold VIP perks</li>
+          <li>Custom character outfit</li>
+          <li>Name colour in chat</li>
+          <li>Early access to updates</li>
+          <li>Direct staff chat access</li>
+        </ul>
+        <a href="https://YOUR-SERVER.tebex.io" target="_blank" class="btn-pkg">Get Package</a>
       </div>
     </div>
   </div>
-</section>
 </div>
 
-<!-- STAFF -->
-
-<section id="staff">
-  <p class="section-label">The Team</p>
-  <h2 class="section-title">Staff</h2>
-  <div class="section-divider"></div>
-  <div class="staff-grid">
-    <div class="staff-card">
-      <div class="staff-avatar">👑</div>
-      <div class="staff-name">Owner</div>
-      <div class="staff-role">Server Owner</div>
-    </div>
-    <div class="staff-card">
-      <div class="staff-avatar">⚙️</div>
-      <div class="staff-name">Dev Team</div>
-      <div class="staff-role">Development</div>
-    </div>
-    <div class="staff-card">
-      <div class="staff-avatar">🛡️</div>
-      <div class="staff-name">Head Admin</div>
-      <div class="staff-role">Administration</div>
-    </div>
-    <div class="staff-card">
-      <div class="staff-avatar">🎭</div>
-      <div class="staff-name">Head Mod</div>
-      <div class="staff-role">Moderation</div>
-    </div>
+<div class="sw" style="padding-bottom:0 !important;">
+  <div class="discord-cta">
+    <span class="discord-title">Join the Community</span>
+    <p class="discord-sub">Connect with hundreds of players, stay up to date on server news,<br/>apply for factions, and get support — all in our Discord.</p>
+    <a href="https://discord.gg/dBFZrgDhSq" target="_blank" class="btn-discord">
+      <svg width="20" height="15" viewBox="0 0 22 16" fill="none"><path d="M18.59 1.33A18.2 18.2 0 0 0 14.26 0c-.19.34-.4.8-.55 1.16a16.87 16.87 0 0 0-5.42 0A12.7 12.7 0 0 0 7.74 0 18.23 18.23 0 0 0 3.4 1.34C.49 5.7-.3 9.95.09 14.14a18.38 18.38 0 0 0 5.63 2.85c.45-.62.86-1.28 1.2-1.97a11.96 11.96 0 0 1-1.9-.91c.16-.11.31-.23.46-.35a13.1 13.1 0 0 0 11.03 0c.15.12.3.24.46.35-.6.36-1.24.66-1.9.92.35.69.75 1.35 1.2 1.97a18.32 18.32 0 0 0 5.64-2.86c.46-4.84-.79-9.04-3.32-12.81ZM7.34 11.59c-1.18 0-2.14-1.08-2.14-2.4s.94-2.4 2.14-2.4c1.2 0 2.16 1.08 2.14 2.4 0 1.32-.94 2.4-2.14 2.4Zm7.32 0c-1.18 0-2.14-1.08-2.14-2.4s.94-2.4 2.14-2.4c1.2 0 2.16 1.08 2.14 2.4 0 1.32-.93 2.4-2.14 2.4Z" fill="white"/></svg>
+      Join Our Discord
+    </a>
   </div>
-</section>
-
-<!-- STORE -->
-
-<div class="store-section" style="padding:0;">
-<section id="store">
-  <p class="section-label">Support the Server</p>
-  <h2 class="section-title">Store Packages</h2>
-  <div class="section-divider"></div>
-  <p style="color:var(--muted); font-size:0.9rem; margin-top:-30px; margin-bottom:10px;">Packages are handled securely through our Tebex store.</p>
-  <div class="packages-grid">
-    <div class="package-card">
-      <div class="package-name">Civilian</div>
-      <div class="package-price"><sup>$</sup>5<span>/mo</span></div>
-      <ul class="package-features">
-        <li>Priority Queue</li>
-        <li>Civilian Badge in Discord</li>
-        <li>Custom plate access</li>
-        <li>Basic starter kit</li>
-      </ul>
-      <a href="#" class="btn-store">Get Package</a>
-    </div>
-    <div class="package-card featured">
-      <div class="package-badge">Most Popular</div>
-      <div class="package-name">Gold VIP</div>
-      <div class="package-price"><sup>$</sup>15<span>/mo</span></div>
-      <ul class="package-features">
-        <li>Priority Queue + Reserved Slot</li>
-        <li>Gold role in Discord</li>
-        <li>Custom vehicle spawn</li>
-        <li>Extra character slots</li>
-        <li>Exclusive VIP areas</li>
-      </ul>
-      <a href="#" class="btn-store">Get Package</a>
-    </div>
-    <div class="package-card">
-      <div class="package-name">Elite</div>
-      <div class="package-price"><sup>$</sup>30<span>/mo</span></div>
-      <ul class="package-features">
-        <li>All Gold VIP perks</li>
-        <li>Custom character outfit</li>
-        <li>Name colour in chat</li>
-        <li>Early access to updates</li>
-        <li>Direct staff chat access</li>
-      </ul>
-      <a href="#" class="btn-store">Get Package</a>
-    </div>
-  </div>
-</section>
 </div>
-
-<!-- DISCORD CTA -->
-
-<div class="discord-cta" id="discord">
-  <h2 class="discord-title">Join the Community</h2>
-  <p class="discord-sub">Connect with hundreds of players, stay up to date on server news,<br>apply for factions, and get support — all in our Discord.</p>
-  <a href="https://discord.gg/dBFZrgDhSq" target="_blank" class="btn-discord">
-    <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><path d="M18.59 1.33A18.2 18.2 0 0 0 14.26 0c-.19.34-.4.8-.55 1.16a16.87 16.87 0 0 0-5.42 0A12.7 12.7 0 0 0 7.74 0 18.23 18.23 0 0 0 3.4 1.34C.49 5.7-.3 9.95.09 14.14a18.38 18.38 0 0 0 5.63 2.85c.45-.62.86-1.28 1.2-1.97a11.96 11.96 0 0 1-1.9-.91c.16-.11.31-.23.46-.35a13.1 13.1 0 0 0 11.03 0c.15.12.3.24.46.35-.6.36-1.24.66-1.9.92.35.69.75 1.35 1.2 1.97a18.32 18.32 0 0 0 5.64-2.86c.46-4.84-.79-9.04-3.32-12.81ZM7.34 11.59c-1.18 0-2.14-1.08-2.14-2.4s.94-2.4 2.14-2.4c1.2 0 2.16 1.08 2.14 2.4 0 1.32-.94 2.4-2.14 2.4Zm7.32 0c-1.18 0-2.14-1.08-2.14-2.4s.94-2.4 2.14-2.4c1.2 0 2.16 1.08 2.14 2.4 0 1.32-.93 2.4-2.14 2.4Z" fill="white"/></svg>
-    Join Our Discord
-  </a>
-</div>
-
-<!-- FOOTER -->
 
 <footer>
-  <div class="footer-logo">Wretched<span>.</span>City</div>
-  <div class="footer-text">© 2026 Wretched City RP · FiveM Roleplay Server · Not affiliated with Rockstar Games</div>
+  <div class="footer-logo">Wretched<span class="dot">.</span>City</div>
+  <div class="footer-copy">© 2026 Wretched City RP · FiveM Roleplay · Not affiliated with Rockstar Games</div>
 </footer>
 
 </body>
