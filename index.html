@@ -426,11 +426,11 @@ h1,h2,h3,h4,h5,h6,.stitle,.discord-title,.footer-logo { color:#eef4fa !important
 
 <script>
 // ============================================
-// LIVE SERVER STATS — pulls from FiveM API
-// Updates every 30 seconds automatically
+// LIVE SERVER STATS — FiveM Official API
+// CFX Code: krdye6 — updates every 30 seconds
 // ============================================
-const SERVER_IP = '206.168.173.33';
-const SERVER_PORT = '30120';
+const CFX_CODE = 'krdye6';
+const API_URL = `https://servers-frontend.fivem.net/api/servers/single/${CFX_CODE}`;
 
 async function fetchServerStats() {
   const onlineEl = document.getElementById('stat-online');
@@ -439,39 +439,36 @@ async function fetchServerStats() {
   const statusLabelEl = document.getElementById('stat-status-label');
 
   try {
-    // Fetch players and server info in parallel
-    const [playersRes, infoRes] = await Promise.all([
-      fetch(`http://${SERVER_IP}:${SERVER_PORT}/players.json`, { signal: AbortSignal.timeout(6000) }),
-      fetch(`http://${SERVER_IP}:${SERVER_PORT}/info.json`, { signal: AbortSignal.timeout(6000) })
-    ]);
+    const res = await fetch(API_URL, { signal: AbortSignal.timeout(8000) });
+    const data = await res.json();
+    const srv = data?.Data;
 
-    const players = await playersRes.json();
-    const info = await infoRes.json();
+    if (!srv) throw new Error('No data');
 
     // Players online
-    onlineEl.textContent = players.length;
+    const online = srv.clients ?? 0;
+    onlineEl.textContent = online;
 
-    // Max players from server info
-    const maxPlayers = info?.vars?.sv_maxClients || info?.vars?.onesync_maxPlayers || 128;
-    maxEl.textContent = maxPlayers;
+    // Max players
+    const max = srv.svMaxclients ?? 128;
+    maxEl.textContent = max;
 
-    // Status — online
+    // Online status — green
     statusEl.textContent = '●';
-    statusEl.style.cssText = 'color:#4ade80 !important;font-size:1.8rem !important;';
+    statusEl.style.cssText = 'color:#4ade80 !important; font-size:1.8rem !important; line-height:1 !important;';
     statusLabelEl.textContent = 'Server Online';
     statusLabelEl.style.cssText = 'color:#4ade80 !important;';
 
   } catch (err) {
-    // Server offline or unreachable
+    // Offline or unreachable
     onlineEl.textContent = '0';
     statusEl.textContent = '●';
-    statusEl.style.cssText = 'color:#f87171 !important;font-size:1.8rem !important;';
+    statusEl.style.cssText = 'color:#f87171 !important; font-size:1.8rem !important; line-height:1 !important;';
     statusLabelEl.textContent = 'Server Offline';
     statusLabelEl.style.cssText = 'color:#f87171 !important;';
   }
 }
 
-// Run immediately then every 30 seconds
 fetchServerStats();
 setInterval(fetchServerStats, 30000);
 </script>
