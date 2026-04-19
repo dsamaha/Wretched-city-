@@ -84,9 +84,9 @@ backdrop-filter: blur(2px);
 font-family: var(–font-display);
 font-size: 1.6rem;
 letter-spacing: 3px;
-color: var(–white);
+color: #eef4fa !important;
 }
-.nav-logo span { color: var(–blue); }
+.nav-logo span { color: #5bb8f5 !important; }
 
 .nav-links {
 display: flex;
@@ -183,7 +183,7 @@ font-family: var(–font-condensed);
 font-size: 0.75rem;
 letter-spacing: 6px;
 text-transform: uppercase;
-color: var(–blue);
+color: #5bb8f5 !important;
 margin-bottom: 18px;
 opacity: 0;
 animation: fadeUp 0.8s 0.2s forwards;
@@ -194,20 +194,20 @@ font-family: var(–font-display);
 font-size: clamp(5rem, 14vw, 11rem);
 line-height: 0.9;
 letter-spacing: 4px;
-color: var(–white);
+color: #eef4fa !important;
 opacity: 0;
 animation: fadeUp 0.8s 0.4s forwards;
 }
 
 .hero-title .city {
 display: block;
-color: var(–blue);
-text-shadow: 0 0 60px rgba(91,184,245,0.4), 0 0 120px rgba(91,184,245,0.2);
+color: #eef4fa !important;
+text-shadow: 0 0 80px rgba(91,184,245,0.7), 0 0 160px rgba(91,184,245,0.4), 0 0 40px rgba(91,184,245,0.9);
 }
 
 .hero-subtitle {
 font-size: 1rem;
-color: var(–muted);
+color: #5a6a7a !important;
 letter-spacing: 2px;
 margin-top: 20px;
 font-weight: 300;
@@ -777,6 +777,32 @@ section { padding: 70px 24px; }
 .staff-grid { grid-template-columns: repeat(2, 1fr); }
 .discord-cta { padding: 50px 24px; margin: 0 24px 70px; }
 footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24px; }
+}
+
+/* BLOCK iOS / Safari dark mode from overriding anything */
+@media (prefers-color-scheme: dark) {
+html, body { background: #080a0f !important; color: #c8d4e0 !important; }
+h1, h2, h3, h4, h5, h6 { color: #eef4fa !important; }
+p, li, span, div { color: inherit !important; }
+.hero-title { color: #eef4fa !important; }
+.hero-title .city { color: #5bb8f5 !important; }
+.section-title { color: #eef4fa !important; }
+.nav-logo { color: #eef4fa !important; }
+.stat-num { color: #5bb8f5 !important; }
+.stat-label { color: #5a6a7a !important; }
+.step-title, .faction-name, .rule-title, .staff-name, .package-name { color: #eef4fa !important; }
+.step-text, .faction-desc, .rule-desc, .package-features li { color: #5a6a7a !important; }
+.package-price { color: #5bb8f5 !important; }
+.section-label, .faction-tag, .staff-role { color: #5bb8f5 !important; }
+.hero-eyebrow, .hero-subtitle { color: #5a6a7a !important; }
+.package-card, .step-card, .faction-card, .staff-card, .rule-item { background: #0d1018 !important; }
+.stats-bar, .rules-section { background: #0d1018 !important; }
+.store-section { background: #111520 !important; }
+.discord-cta { background: rgba(91,184,245,0.06) !important; }
+footer { background: transparent !important; }
+.btn-primary { background: #5bb8f5 !important; color: #080a0f !important; }
+.btn-store { color: #5bb8f5 !important; border-color: #5bb8f5 !important; background: transparent !important; }
+.package-card.featured .btn-store { background: #5bb8f5 !important; color: #080a0f !important; }
 }
 </style>
 
