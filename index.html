@@ -129,7 +129,10 @@ backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
 .packages-grid { display:grid !important; grid-template-columns:repeat(3,1fr) !important; gap:18px !important; }
 .pkg-card { background:#0d1018 !important; background-color:#0d1018 !important; border:1px solid rgba(91,184,245,0.15) !important; padding:34px 24px !important; text-align:center !important; position:relative !important; transition:all 0.3s; }
 .pkg-card:hover { border-color:rgba(91,184,245,0.4) !important; transform:translateY(-4px); box-shadow:0 16px 48px rgba(91,184,245,0.08) !important; }
+.pkg-card.coming-soon { opacity:0.45 !important; pointer-events:none !important; border-color:rgba(91,184,245,0.06) !important; }
+.pkg-card.coming-soon:hover { transform:none !important; box-shadow:none !important; border-color:rgba(91,184,245,0.06) !important; }
 .pkg-badge { position:absolute !important; top:-1px !important; left:50% !important; transform:translateX(-50%) !important; background:#5bb8f5 !important; color:#080a0f !important; font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif !important; font-size:0.62rem !important; letter-spacing:2px !important; text-transform:uppercase !important; font-weight:700 !important; padding:4px 14px !important; white-space:nowrap !important; }
+.pkg-badge.soon { background:#3a4a5a !important; color:#c8d4e0 !important; }
 .pkg-name { font-family:'Bebas Neue','Arial Narrow',Arial,sans-serif !important; font-size:1.7rem !important; letter-spacing:2px !important; color:#eef4fa !important; margin-top:12px !important; margin-bottom:4px !important; display:block !important; }
 .pkg-price { font-family:'Bebas Neue','Arial Narrow',Arial,sans-serif !important; font-size:2.8rem !important; color:#5bb8f5 !important; line-height:1 !important; margin:14px 0 !important; display:block !important; }
 .pkg-price sup { font-size:1.1rem !important; vertical-align:super !important; color:#5bb8f5 !important; }
@@ -139,6 +142,8 @@ backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
 .pkg-features li::before { content:'▸' !important; color:#5bb8f5 !important; flex-shrink:0 !important; }
 .btn-pkg { width:100% !important; display:block !important; background:transparent !important; border:1px solid #5bb8f5 !important; color:#5bb8f5 !important; padding:11px !important; font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif !important; font-size:0.82rem !important; letter-spacing:2px !important; text-transform:uppercase !important; text-decoration:none !important; transition:all 0.2s; cursor:pointer !important; -webkit-appearance:none !important; appearance:none !important; }
 .btn-pkg:hover { background:#5bb8f5 !important; color:#080a0f !important; }
+.btn-pkg.disabled { border-color:#3a4a5a !important; color:#3a4a5a !important; cursor:default !important; }
+.btn-pkg.disabled:hover { background:transparent !important; color:#3a4a5a !important; }
 
 /* DISCORD CTA */
 .discord-cta { max-width:860px !important; margin:0 auto 90px !important; background:rgba(91,184,245,0.04) !important; border:1px solid rgba(91,184,245,0.14) !important; padding:72px 48px !important; text-align:center !important; }
@@ -196,6 +201,7 @@ h1,h2,h3,h4,h5,h6,.stitle,.discord-title,.footer-logo { color:#eef4fa !important
 .btn-blue { background:#5bb8f5 !important; color:#080a0f !important; }
 .btn-ghost { color:#c8d4e0 !important; border-color:#5a6a7a !important; }
 .btn-pkg { color:#5bb8f5 !important; border-color:#5bb8f5 !important; background:transparent !important; }
+.btn-pkg.disabled { color:#3a4a5a !important; border-color:#3a4a5a !important; background:transparent !important; }
 .nav-btn { color:#5bb8f5 !important; border-color:#5bb8f5 !important; }
 .nav-logo { color:#eef4fa !important; }
 .nav-links a { color:#5a6a7a !important; }
@@ -365,42 +371,46 @@ h1,h2,h3,h4,h5,h6,.stitle,.discord-title,.footer-logo { color:#eef4fa !important
     <span class="srule"></span>
     <p style="color:#5a6a7a !important;font-size:0.88rem;margin-top:-30px !important;margin-bottom:16px !important;">All purchases handled securely through our Tebex store.</p>
     <div class="packages-grid">
+
+      <!-- LIVE: IcePlanet Custom Chain Import -->
       <div class="pkg-card">
-        <span class="pkg-name">Civilian</span>
-        <span class="pkg-price"><sup>$</sup>5<span class="pkg-mo">/mo</span></span>
+        <span class="pkg-name">Custom Chain Import</span>
+        <span class="pkg-price"><sup>$</sup>50<span class="pkg-mo"> one-time</span></span>
         <ul class="pkg-features">
-          <li>Priority Queue</li>
-          <li>Civilian Badge in Discord</li>
-          <li>Custom plate access</li>
-          <li>Basic starter kit</li>
+          <li>IcePlanet chain import service</li>
+          <li>Your own custom chain file</li>
+          <li>Set up as wearable in-city item</li>
+          <li>Unique to your character</li>
         </ul>
-        <a href="https://YOUR-SERVER.tebex.io" target="_blank" class="btn-pkg">Get Package</a>
+        <a href="https://wretched-city.tebex.io" target="_blank" class="btn-pkg">Get Package</a>
       </div>
-      <div class="pkg-card">
-        <div class="pkg-badge">Most Popular</div>
-        <span class="pkg-name">Gold VIP</span>
-        <span class="pkg-price"><sup>$</sup>15<span class="pkg-mo">/mo</span></span>
+
+      <!-- COMING SOON #1 -->
+      <div class="pkg-card coming-soon">
+        <div class="pkg-badge soon">Coming Soon</div>
+        <span class="pkg-name">More Packages</span>
+        <span class="pkg-price" style="color:#3a4a5a !important;">TBA</span>
         <ul class="pkg-features">
-          <li>Priority Queue + Reserved Slot</li>
-          <li>Gold role in Discord</li>
-          <li>Custom vehicle spawn</li>
-          <li>Extra character slots</li>
-          <li>Exclusive VIP areas</li>
+          <li>Stay tuned for more</li>
+          <li>New packages dropping soon</li>
+          <li>Follow our Discord for updates</li>
         </ul>
-        <a href="https://YOUR-SERVER.tebex.io" target="_blank" class="btn-pkg">Get Package</a>
+        <span class="btn-pkg disabled">Coming Soon</span>
       </div>
-      <div class="pkg-card">
-        <span class="pkg-name">Elite</span>
-        <span class="pkg-price"><sup>$</sup>30<span class="pkg-mo">/mo</span></span>
+
+      <!-- COMING SOON #2 -->
+      <div class="pkg-card coming-soon">
+        <div class="pkg-badge soon">Coming Soon</div>
+        <span class="pkg-name">More Packages</span>
+        <span class="pkg-price" style="color:#3a4a5a !important;">TBA</span>
         <ul class="pkg-features">
-          <li>All Gold VIP perks</li>
-          <li>Custom character outfit</li>
-          <li>Name colour in chat</li>
-          <li>Early access to updates</li>
-          <li>Direct staff chat access</li>
+          <li>Stay tuned for more</li>
+          <li>New packages dropping soon</li>
+          <li>Follow our Discord for updates</li>
         </ul>
-        <a href="https://YOUR-SERVER.tebex.io" target="_blank" class="btn-pkg">Get Package</a>
+        <span class="btn-pkg disabled">Coming Soon</span>
       </div>
+
     </div>
   </div>
 </div>
